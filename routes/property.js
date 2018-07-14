@@ -1,10 +1,10 @@
 let express = require('express');
 let router = express.Router();
-
+let async = require('async');
 let Property = require('../models/propertySchema');
 
 router.get('/properties', function (req, res, next) {
-    if (typeof req._query.filter !== 'undefined') {
+    if (typeof req.query.filter !== 'undefined') {
         // let bugetRange = {
         //     low: req.query.budgetLow,
         //     high: req.query.budgetHigh,
@@ -16,7 +16,8 @@ router.get('/properties', function (req, res, next) {
         let bedrooms = [] || [req.query.bedrooms];
         let purchasePriceSelector = (req.query.purchasePrice) ? "$in" : "$nin";
         let purchasePrice = [] || [req.query.purchasePrice];
-
+        console.log(bedroomsSelector);
+        console.log(purchasePriceSelector);
         //For boolean types:
         let furnishedChoice = "none";
         if(typeof req.query.furnished !== 'undefined'){
@@ -54,7 +55,7 @@ router.get('/properties', function (req, res, next) {
                 carParkChoice = true;
             }
         }
-
+        console.log(carParkChoice,storageChoice,gardenChoice);
         async.waterfall([
             function (callback) {
                 console.log("enter into 1st");
@@ -77,7 +78,7 @@ router.get('/properties', function (req, res, next) {
                     purchasePrice : {
                         purchasePriceSelector : purchasePrice
                     }
-                }).exec(function (err, data) {
+                },function (err, data) {
                     if (err) {
                         console.log(err);
                         res.status(500).json(err);
@@ -146,14 +147,14 @@ router.get('/properties', function (req, res, next) {
     }
 });
 
-router.get('/properties/:typeOfDepartment', function (req, res, next) {
+router.get('/properties/department/:typeOfDepartment', function (req, res, next) {
     let typeOfDepartment = req.params.typeOfDepartment;
     Property.find({
-        typeOfDepartment: typeOfDepartment
+        typeOfDepartment: typeOfDepartment.toLowerCase()
     }, function (err, data) {
         if (err) {
             res.status(500).json(err);
-        } else if (!data) {
+        } else if (!data.length) {
             res.status(404).json({
                 'info': 'No properties found on specific Type'
             });
@@ -166,11 +167,11 @@ router.get('/properties/:typeOfDepartment', function (req, res, next) {
 router.get('/city/:cityName', function (req, res, next) {
     let cityName = req.params.cityName;
     Property.find({
-        city: cityName
+        city: cityName.toLowerCase()
     }, function (err, data) {
         if (err) {
             res.status(500).json(err);
-        } else if (!data) {
+        } else if (!data.length) {
             res.status(404).json({
                 'info': 'No properties found on specific City'
             });
