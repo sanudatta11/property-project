@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let Property = require('/routes/property');
+let Property = require('../models/propertySchema');
 
 router.get('/properties', function (req, res, next) {
     if (typeof req._query.filter !== 'undefined') {

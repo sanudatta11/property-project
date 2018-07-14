@@ -3,13 +3,29 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var propertyRouter = require('./routes/property.js');
 
 var app = express();
 
+// database connection
+let options = {
+    useMongoClient: true,
+    server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+};
+mongoose.Promise = global.Promise;
+
+//mongoose.connect('mongodb://oyo:nikhil123@ds161042.mlab.com:61042/oyo', options);
+
+mongoose.connect('mongodb://admin:admin123@ds137661.mlab.com:37661/property-db', options);
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log('We\'re connected!');
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
