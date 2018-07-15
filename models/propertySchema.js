@@ -5,25 +5,22 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var propertySchema = new Schema({
-        title:{
+        "title":{
             type: String,
             required: true
         },
         "description":{
-            type: String,
-            required: true
+            type: String
         },
         "typeOfDepartment":{
-            type: String,
-            required: true
+            type: String
         },
         "city":{
             type: String,
             required: true
         },
         "numberOfFloors":{
-            type: Number,
-            required: true
+            type: Number
         },
         "livingSpace":{
             type: Number,
@@ -34,8 +31,7 @@ var propertySchema = new Schema({
             required: true
         },
         "usableArea":{
-            type: Number,
-            required: true
+            type: Number
         },
         "rooms":{
             type: String,
@@ -50,107 +46,83 @@ var propertySchema = new Schema({
             required: true
         },
         "parkingSpace":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "garden":{
-            type: Boolean,
-            required: true,
-            default: true
+            type: Boolean
         },
         "purchasePrice":{
             type: Number,
             required: true
         },
         "brokerFee":{
-            type: Number,
-            required: true
+            type: Number
         },
         "constructionYear":{
-            type: Number,
-            required: true
+            type: Number
         },
         "propertyState":{
             type: String,
             required: true
         },
         "heating":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "qualityInterior":{
-            type: String,
-            required: true
+            type: String
         },
         "energyCertificate":{
             type: Boolean,
             required: true
         },
         "balcony":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "availability":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "availableDate":{
             type: Date,
             required: true
         },
-        "availableDuration":{
-            type: Number,
-            required: true
-        },
         "rentalYield":{
-            type: Number,
-            required: true
+            type: Number
         },
         "guaranteedRentalYield":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "zipCode":{
-            type: Number,
-            required: true
+            type: Number
         },
         "direction":{
-            type: String,
-            required: true
+            type: String
         },
         "images":{
-            type: String,
-            required: true
+            type: String
         },
         "latitude":{
-            type: Number,
-            required: true
+            type: Number
         },
         "longitude":{
-            type: Number,
-            required: true
+            type: Number
         },
         "address":{
-            type: String,
-            required: true
+            type: String
         },
         "distanceToCityCenter":{
             type: String
         },
         "furnished":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "storage":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "mapping":{
-        type: String
+            type: String
         },
         "studio":{
-            type: Boolean,
-            required: true
+            type: Boolean
         },
         "aboutProperty":{
             type: String
@@ -169,8 +141,7 @@ var propertySchema = new Schema({
             required: true
         },
         "companyLogo":{
-            type: Number,
-            required: true
+            type: String
         }
     },
     {

@@ -27,15 +27,22 @@ db.once('open', function() {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+//Swagger UI
+const swaggerUi = require('swagger-ui-express');
+
+const swaggerDocument = require('./swagger.json');
+// const swaggerDocument = require('./swagger.yaml');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+let optionsSwagger = {
+  explorer: true
+};
 app.use('/v1', propertyRouter);
-
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, optionsSwagger));
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');

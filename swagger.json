@@ -1,0 +1,1462 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "property",
+        "description": "TODO: Add Description"
+    },
+    "host": "localhost:3000",
+    "basePath": "/v1",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/properties": {
+            "get": {
+                "description": "",
+                "summary": "Property with filter",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "PropertiesGet2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "name": "bedrooms",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": ""
+                    },
+                    {
+                        "name": "purchasePrice",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": ""
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "required": true,
+                        "type": "boolean",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/PropertyWithFilterBedroomAndPurchasePrice"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "data": [{
+                                    "garden": true,
+                                    "_id": "5b49ae4b20f8cd57d6a7da60",
+                                    "title": "Nice 200 sq meters house at Berlin downtown",
+                                    "description": "This is a luxurious house in Berlin with sea view.",
+                                    "typeOfDepartment": "House",
+                                    "city": "berlin",
+                                    "numberOfFloors": 3,
+                                    "livingSpace": 200,
+                                    "totalAreas": 400,
+                                    "usableArea": 100,
+                                    "rooms": "4",
+                                    "bedrooms": 4,
+                                    "bathrooms": 4,
+                                    "parkingSpace": true,
+                                    "purchasePrice": 150000000,
+                                    "brokerFee": 20000,
+                                    "constructionYear": 2015,
+                                    "propertyState": "new",
+                                    "heating": true,
+                                    "qualityInterior": "Luxurious",
+                                    "energyCertificate": true,
+                                    "balcony": true,
+                                    "availability": true,
+                                    "availableDate": "2018-01-02T18:30:00Z",
+                                    "availableDuration": 10,
+                                    "rentalYield": 5,
+                                    "guaranteedRentalYield": true,
+                                    "zipCode": 2345,
+                                    "direction": "North",
+                                    "images": "<link>",
+                                    "latitude": 11.33,
+                                    "longitude": 13.22,
+                                    "address": "Sec 15 New York",
+                                    "distanceToCityCenter": "",
+                                    "furnished": true,
+                                    "storage": true,
+                                    "mapping": "iframe",
+                                    "studio": true,
+                                    "aboutProperty": "",
+                                    "propertyManagement": "",
+                                    "financing": true,
+                                    "welcomeNote": "",
+                                    "price": 100021
+                                }]
+                            }
+                        }
+                    }
+                },
+                "security": [],
+                "x-unitTests": [{
+                    "request": {
+                        "method": "GET",
+                        "uri": "/properties?bedrooms=4&purchasePrice=150000000&filter=true"
+                    },
+                    "expectedResponse": {
+                        "x-allowExtraHeaders": true,
+                        "x-bodyMatchMode": "RAW",
+                        "x-arrayOrderedMatching": false,
+                        "x-arrayCheckCount": false,
+                        "x-matchResponseSchema": true,
+                        "headers": {
+                            "Connection": "keep-alive",
+                            "Content-Length": "958",
+                            "Content-Type": "application/json; charset=utf-8",
+                            "Date": "Sat, 14 Jul 2018 13:36:26 GMT",
+                            "ETag": "W/\"3be-gDWw+rW3Xxoba+LKngiOZd/XoRg\"",
+                            "X-Powered-By": "Express"
+                        },
+                        "body": "{\"data\":[{\"garden\":true,\"_id\":\"5b49ae4b20f8cd57d6a7da60\",\"title\":\"Nice 200 sq meters house at Berlin downtown\",\"description\":\"This is a luxurious house in Berlin with sea view.\",\"typeOfDepartment\":\"House\",\"city\":\"berlin\",\"numberOfFloors\":3,\"livingSpace\":200,\"totalAreas\":400,\"usableArea\":100,\"rooms\":\"4\",\"bedrooms\":4,\"bathrooms\":4,\"parkingSpace\":true,\"purchasePrice\":150000000,\"brokerFee\":20000,\"constructionYear\":2015,\"propertyState\":\"new\",\"heating\":true,\"qualityInterior\":\"Luxurious\",\"energyCertificate\":true,\"balcony\":true,\"availability\":true,\"availableDate\":\"2018-01-02T18:30:00Z\",\"availableDuration\":10,\"rentalYield\":5,\"guaranteedRentalYield\":true,\"zipCode\":2345,\"direction\":\"North\",\"images\":\"<link>\",\"latitude\":11.33,\"longitude\":13.22,\"address\":\"Sec 15 New York\",\"distanceToCityCenter\":\"\",\"furnished\":true,\"storage\":true,\"mapping\":\"iframe\",\"studio\":true,\"aboutProperty\":\"\",\"propertyManagement\":\"\",\"financing\":true,\"welcomeNote\":\"\",\"price\":100021}]}"
+                    },
+                    "x-testShouldPass": true,
+                    "x-testEnabled": true,
+                    "x-testName": "Property with filter",
+                    "x-testDescription": ""
+                }],
+                "x-operation-settings": {
+                    "CollectParameters": false,
+                    "AllowDynamicQueryParameters": false,
+                    "AllowDynamicFormParameters": false,
+                    "IsMultiContentStreaming": false
+                }
+            }
+        },
+        "/properties/department/apartment": {
+            "get": {
+                "description": "",
+                "summary": "Property with type",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "PropertiesDepartmentApartmentGet",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Property  apartment"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [{
+                                "garden": true,
+                                "_id": "5b49e811fa9f6d0eade076fe",
+                                "title": "Title 2",
+                                "description": "Test description 2",
+                                "typeOfDepartment": "apartment",
+                                "city": "NY",
+                                "numberOfFloors": 5,
+                                "livingSpace": 200,
+                                "totalAreas": 233,
+                                "usableArea": 433,
+                                "rooms": "5",
+                                "bedrooms": 2,
+                                "bathrooms": 4,
+                                "parkingSpace": false,
+                                "purchasePrice": 130000000,
+                                "brokerFee": 20000,
+                                "constructionYear": 2015,
+                                "propertyState": "new",
+                                "heating": true,
+                                "qualityInterior": "Luxurious",
+                                "energyCertificate": true,
+                                "balcony": true,
+                                "availability": true,
+                                "availableDate": "2018-01-02T18:30:00Z",
+                                "availableDuration": 10,
+                                "rentalYield": 5,
+                                "guaranteedRentalYield": true,
+                                "zipCode": 2345,
+                                "direction": "North",
+                                "images": "<link>",
+                                "latitude": 11.33,
+                                "longitude": 13.22,
+                                "address": "Sec 15 New York",
+                                "distanceToCityCenter": "",
+                                "furnished": true,
+                                "storage": true,
+                                "mapping": "iframe",
+                                "studio": true,
+                                "aboutProperty": "",
+                                "propertyManagement": "",
+                                "financing": true,
+                                "welcomeNote": "",
+                                "price": 100021
+                            }]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/PropertyWithTypeNotFound"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "info": "No properties found on specific Type"
+                            }
+                        }
+                    }
+                },
+                "security": [],
+                "x-unitTests": [{
+                    "request": {
+                        "method": "GET",
+                        "uri": "/properties/department/apartment"
+                    },
+                    "expectedResponse": {
+                        "x-allowExtraHeaders": true,
+                        "x-bodyMatchMode": "RAW",
+                        "x-arrayOrderedMatching": false,
+                        "x-arrayCheckCount": false,
+                        "x-matchResponseSchema": true,
+                        "headers": {
+                            "Connection": "keep-alive",
+                            "Content-Length": "882",
+                            "Content-Type": "application/json; charset=utf-8",
+                            "Date": "Sat, 14 Jul 2018 12:12:16 GMT",
+                            "ETag": "W/\"372-Rj3DAnsAicxd3fDQdqF2f0UW/fk\"",
+                            "X-Powered-By": "Express"
+                        },
+                        "body": "[{\"garden\":true,\"_id\":\"5b49e811fa9f6d0eade076fe\",\"title\":\"Title 2\",\"description\":\"Test description 2\",\"typeOfDepartment\":\"apartment\",\"city\":\"NY\",\"numberOfFloors\":5,\"livingSpace\":200,\"totalAreas\":233,\"usableArea\":433,\"rooms\":\"5\",\"bedrooms\":2,\"bathrooms\":4,\"parkingSpace\":false,\"purchasePrice\":130000000,\"brokerFee\":20000,\"constructionYear\":2015,\"propertyState\":\"new\",\"heating\":true,\"qualityInterior\":\"Luxurious\",\"energyCertificate\":true,\"balcony\":true,\"availability\":true,\"availableDate\":\"2018-01-02T18:30:00Z\",\"availableDuration\":10,\"rentalYield\":5,\"guaranteedRentalYield\":true,\"zipCode\":2345,\"direction\":\"North\",\"images\":\"<link>\",\"latitude\":11.33,\"longitude\":13.22,\"address\":\"Sec 15 New York\",\"distanceToCityCenter\":\"\",\"furnished\":true,\"storage\":true,\"mapping\":\"iframe\",\"studio\":true,\"aboutProperty\":\"\",\"propertyManagement\":\"\",\"financing\":true,\"welcomeNote\":\"\",\"price\":100021}]"
+                    },
+                    "x-testShouldPass": true,
+                    "x-testEnabled": true,
+                    "x-testName": "Property with type",
+                    "x-testDescription": ""
+                }],
+                "x-operation-settings": {
+                    "CollectParameters": false,
+                    "AllowDynamicQueryParameters": false,
+                    "AllowDynamicFormParameters": false,
+                    "IsMultiContentStreaming": false
+                }
+            }
+        },
+        "/city/berlin": {
+            "get": {
+                "description": "",
+                "summary": "City",
+                "tags": [
+                    "Misc"
+                ],
+                "operationId": "CityBerlinGet",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/City  ny"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [{
+                                "garden": true,
+                                "_id": "5b49e811fa9f6d0eade076fe",
+                                "title": "Title 2",
+                                "description": "Test description 2",
+                                "typeOfDepartment": "apartment",
+                                "city": "new york",
+                                "numberOfFloors": 5,
+                                "livingSpace": 200,
+                                "totalAreas": 233,
+                                "usableArea": 433,
+                                "rooms": "5",
+                                "bedrooms": 2,
+                                "bathrooms": 4,
+                                "parkingSpace": false,
+                                "purchasePrice": 130000000,
+                                "brokerFee": 20000,
+                                "constructionYear": 2015,
+                                "propertyState": "new",
+                                "heating": true,
+                                "qualityInterior": "Luxurious",
+                                "energyCertificate": true,
+                                "balcony": true,
+                                "availability": true,
+                                "availableDate": "2018-01-02T18:30:00Z",
+                                "availableDuration": 10,
+                                "rentalYield": 5,
+                                "guaranteedRentalYield": true,
+                                "zipCode": 2345,
+                                "direction": "North",
+                                "images": "<link>",
+                                "latitude": 11.33,
+                                "longitude": 13.22,
+                                "address": "Sec 15 New York",
+                                "distanceToCityCenter": "",
+                                "furnished": true,
+                                "storage": true,
+                                "mapping": "iframe",
+                                "studio": true,
+                                "aboutProperty": "",
+                                "propertyManagement": "",
+                                "financing": true,
+                                "welcomeNote": "",
+                                "price": 100021
+                            }]
+                        }
+                    }
+                },
+                "security": [],
+                "x-unitTests": [{
+                    "request": {
+                        "method": "GET",
+                        "uri": "/city/berlin"
+                    },
+                    "expectedResponse": {
+                        "x-allowExtraHeaders": true,
+                        "x-bodyMatchMode": "RAW",
+                        "x-arrayOrderedMatching": false,
+                        "x-arrayCheckCount": false,
+                        "x-matchResponseSchema": true,
+                        "headers": {
+                            "Connection": "keep-alive",
+                            "Content-Length": "888",
+                            "Content-Type": "application/json; charset=utf-8",
+                            "Date": "Sat, 14 Jul 2018 12:16:34 GMT",
+                            "ETag": "W/\"378-jDE6gch0E5+JZvazpgdiec6NQUo\"",
+                            "X-Powered-By": "Express"
+                        },
+                        "body": "[{\"garden\":true,\"_id\":\"5b49e811fa9f6d0eade076fe\",\"title\":\"Title 2\",\"description\":\"Test description 2\",\"typeOfDepartment\":\"apartment\",\"city\":\"new york\",\"numberOfFloors\":5,\"livingSpace\":200,\"totalAreas\":233,\"usableArea\":433,\"rooms\":\"5\",\"bedrooms\":2,\"bathrooms\":4,\"parkingSpace\":false,\"purchasePrice\":130000000,\"brokerFee\":20000,\"constructionYear\":2015,\"propertyState\":\"new\",\"heating\":true,\"qualityInterior\":\"Luxurious\",\"energyCertificate\":true,\"balcony\":true,\"availability\":true,\"availableDate\":\"2018-01-02T18:30:00Z\",\"availableDuration\":10,\"rentalYield\":5,\"guaranteedRentalYield\":true,\"zipCode\":2345,\"direction\":\"North\",\"images\":\"<link>\",\"latitude\":11.33,\"longitude\":13.22,\"address\":\"Sec 15 New York\",\"distanceToCityCenter\":\"\",\"furnished\":true,\"storage\":true,\"mapping\":\"iframe\",\"studio\":true,\"aboutProperty\":\"\",\"propertyManagement\":\"\",\"financing\":true,\"welcomeNote\":\"\",\"price\":100021}]"
+                    },
+                    "x-testShouldPass": true,
+                    "x-testEnabled": true,
+                    "x-testName": "City",
+                    "x-testDescription": ""
+                }],
+                "x-operation-settings": {
+                    "CollectParameters": false,
+                    "AllowDynamicQueryParameters": false,
+                    "AllowDynamicFormParameters": false,
+                    "IsMultiContentStreaming": false
+                }
+            }
+        }
+    },
+    "definitions": {
+        "PropertyWithTypeNotFound": {
+            "title": "Property with type not found",
+            "example": {
+                "info": "No properties found on specific Type"
+            },
+            "type": "object",
+            "properties": {
+                "info": {
+                    "description": "",
+                    "example": "No properties found on specific Type",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "info"
+            ]
+        },
+        "Property  apartment": {
+            "title": "Property - Apartment",
+            "example": {
+                "garden": true,
+                "_id": "5b49e811fa9f6d0eade076fe",
+                "title": "Title 2",
+                "description": "Test description 2",
+                "typeOfDepartment": "apartment",
+                "city": "NY",
+                "numberOfFloors": 5,
+                "livingSpace": 200,
+                "totalAreas": 233,
+                "usableArea": 433,
+                "rooms": "5",
+                "bedrooms": 2,
+                "bathrooms": 4,
+                "parkingSpace": false,
+                "purchasePrice": 130000000,
+                "brokerFee": 20000,
+                "constructionYear": 2015,
+                "propertyState": "new",
+                "heating": true,
+                "qualityInterior": "Luxurious",
+                "energyCertificate": true,
+                "balcony": true,
+                "availability": true,
+                "availableDate": "2018-01-02T18:30:00Z",
+                "availableDuration": 10,
+                "rentalYield": 5,
+                "guaranteedRentalYield": true,
+                "zipCode": 2345,
+                "direction": "North",
+                "images": "<link>",
+                "latitude": 11.33,
+                "longitude": 13.22,
+                "address": "Sec 15 New York",
+                "distanceToCityCenter": "",
+                "furnished": true,
+                "storage": true,
+                "mapping": "iframe",
+                "studio": true,
+                "aboutProperty": "",
+                "propertyManagement": "",
+                "financing": true,
+                "welcomeNote": "",
+                "price": 100021
+            },
+            "type": "object",
+            "properties": {
+                "garden": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "_id": {
+                    "description": "",
+                    "example": "5b49e811fa9f6d0eade076fe",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "",
+                    "example": "Title 2",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "",
+                    "example": "Test description 2",
+                    "type": "string"
+                },
+                "typeOfDepartment": {
+                    "description": "",
+                    "example": "apartment",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "",
+                    "example": "NY",
+                    "type": "string"
+                },
+                "numberOfFloors": {
+                    "description": "",
+                    "example": 5,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "livingSpace": {
+                    "description": "",
+                    "example": 200,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalAreas": {
+                    "description": "",
+                    "example": 233,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "usableArea": {
+                    "description": "",
+                    "example": 433,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rooms": {
+                    "description": "",
+                    "example": "5",
+                    "type": "string"
+                },
+                "bedrooms": {
+                    "description": "",
+                    "example": 2,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bathrooms": {
+                    "description": "",
+                    "example": 4,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "parkingSpace": {
+                    "description": "",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "purchasePrice": {
+                    "description": "",
+                    "example": 130000000,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "brokerFee": {
+                    "description": "",
+                    "example": 20000,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "constructionYear": {
+                    "description": "",
+                    "example": 2015,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "propertyState": {
+                    "description": "",
+                    "example": "new",
+                    "type": "string"
+                },
+                "heating": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "qualityInterior": {
+                    "description": "",
+                    "example": "Luxurious",
+                    "type": "string"
+                },
+                "energyCertificate": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "balcony": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "availability": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "availableDate": {
+                    "description": "",
+                    "example": "1/2/2018 6:30:00 PM",
+                    "type": "string"
+                },
+                "availableDuration": {
+                    "description": "",
+                    "example": 10,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rentalYield": {
+                    "description": "",
+                    "example": 5,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "guaranteedRentalYield": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "zipCode": {
+                    "description": "",
+                    "example": 2345,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "direction": {
+                    "description": "",
+                    "example": "North",
+                    "type": "string"
+                },
+                "images": {
+                    "description": "",
+                    "example": "<link>",
+                    "type": "string"
+                },
+                "latitude": {
+                    "description": "",
+                    "example": 11.33,
+                    "type": "number",
+                    "format": "double"
+                },
+                "longitude": {
+                    "description": "",
+                    "example": 13.22,
+                    "type": "number",
+                    "format": "double"
+                },
+                "address": {
+                    "description": "",
+                    "example": "Sec 15 New York",
+                    "type": "string"
+                },
+                "distanceToCityCenter": {
+                    "description": "",
+                    "type": "string"
+                },
+                "furnished": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "storage": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "mapping": {
+                    "description": "",
+                    "example": "iframe",
+                    "type": "string"
+                },
+                "studio": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "aboutProperty": {
+                    "description": "",
+                    "type": "string"
+                },
+                "propertyManagement": {
+                    "description": "",
+                    "type": "string"
+                },
+                "financing": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "welcomeNote": {
+                    "description": "",
+                    "type": "string"
+                },
+                "price": {
+                    "description": "",
+                    "example": 100021,
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "garden",
+                "_id",
+                "title",
+                "description",
+                "typeOfDepartment",
+                "city",
+                "numberOfFloors",
+                "livingSpace",
+                "totalAreas",
+                "usableArea",
+                "rooms",
+                "bedrooms",
+                "bathrooms",
+                "parkingSpace",
+                "purchasePrice",
+                "brokerFee",
+                "constructionYear",
+                "propertyState",
+                "heating",
+                "qualityInterior",
+                "energyCertificate",
+                "balcony",
+                "availability",
+                "availableDate",
+                "availableDuration",
+                "rentalYield",
+                "guaranteedRentalYield",
+                "zipCode",
+                "direction",
+                "images",
+                "latitude",
+                "longitude",
+                "address",
+                "distanceToCityCenter",
+                "furnished",
+                "storage",
+                "mapping",
+                "studio",
+                "aboutProperty",
+                "propertyManagement",
+                "financing",
+                "welcomeNote",
+                "price"
+            ]
+        },
+        "PropertyWithFilterBedroomAndPurchasePrice": {
+            "title": "Property with filter bedroom and purchase price",
+            "example": {
+                "data": [{
+                    "garden": true,
+                    "_id": "5b49ae4b20f8cd57d6a7da60",
+                    "title": "Nice 200 sq meters house at Berlin downtown",
+                    "description": "This is a luxurious house in Berlin with sea view.",
+                    "typeOfDepartment": "House",
+                    "city": "berlin",
+                    "numberOfFloors": 3,
+                    "livingSpace": 200,
+                    "totalAreas": 400,
+                    "usableArea": 100,
+                    "rooms": "4",
+                    "bedrooms": 4,
+                    "bathrooms": 4,
+                    "parkingSpace": true,
+                    "purchasePrice": 150000000,
+                    "brokerFee": 20000,
+                    "constructionYear": 2015,
+                    "propertyState": "new",
+                    "heating": true,
+                    "qualityInterior": "Luxurious",
+                    "energyCertificate": true,
+                    "balcony": true,
+                    "availability": true,
+                    "availableDate": "2018-01-02T18:30:00Z",
+                    "availableDuration": 10,
+                    "rentalYield": 5,
+                    "guaranteedRentalYield": true,
+                    "zipCode": 2345,
+                    "direction": "North",
+                    "images": "<link>",
+                    "latitude": 11.33,
+                    "longitude": 13.22,
+                    "address": "Sec 15 New York",
+                    "distanceToCityCenter": "",
+                    "furnished": true,
+                    "storage": true,
+                    "mapping": "iframe",
+                    "studio": true,
+                    "aboutProperty": "",
+                    "propertyManagement": "",
+                    "financing": true,
+                    "welcomeNote": "",
+                    "price": 100021
+                }]
+            },
+            "type": "object",
+            "properties": {
+                "data": {
+                    "description": "",
+                    "example": [{
+                        "garden": true,
+                        "_id": "5b49ae4b20f8cd57d6a7da60",
+                        "title": "Nice 200 sq meters house at Berlin downtown",
+                        "description": "This is a luxurious house in Berlin with sea view.",
+                        "typeOfDepartment": "House",
+                        "city": "berlin",
+                        "numberOfFloors": 3,
+                        "livingSpace": 200,
+                        "totalAreas": 400,
+                        "usableArea": 100,
+                        "rooms": "4",
+                        "bedrooms": 4,
+                        "bathrooms": 4,
+                        "parkingSpace": true,
+                        "purchasePrice": 150000000,
+                        "brokerFee": 20000,
+                        "constructionYear": 2015,
+                        "propertyState": "new",
+                        "heating": true,
+                        "qualityInterior": "Luxurious",
+                        "energyCertificate": true,
+                        "balcony": true,
+                        "availability": true,
+                        "availableDate": "2018-01-02T18:30:00Z",
+                        "availableDuration": 10,
+                        "rentalYield": 5,
+                        "guaranteedRentalYield": true,
+                        "zipCode": 2345,
+                        "direction": "North",
+                        "images": "<link>",
+                        "latitude": 11.33,
+                        "longitude": 13.22,
+                        "address": "Sec 15 New York",
+                        "distanceToCityCenter": "",
+                        "furnished": true,
+                        "storage": true,
+                        "mapping": "iframe",
+                        "studio": true,
+                        "aboutProperty": "",
+                        "propertyManagement": "",
+                        "financing": true,
+                        "welcomeNote": "",
+                        "price": 100021
+                    }],
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datum"
+                    }
+                }
+            },
+            "required": [
+                "data"
+            ]
+        },
+        "Datum": {
+            "title": "Datum",
+            "example": {
+                "garden": true,
+                "_id": "5b49ae4b20f8cd57d6a7da60",
+                "title": "Nice 200 sq meters house at Berlin downtown",
+                "description": "This is a luxurious house in Berlin with sea view.",
+                "typeOfDepartment": "House",
+                "city": "berlin",
+                "numberOfFloors": 3,
+                "livingSpace": 200,
+                "totalAreas": 400,
+                "usableArea": 100,
+                "rooms": "4",
+                "bedrooms": 4,
+                "bathrooms": 4,
+                "parkingSpace": true,
+                "purchasePrice": 150000000,
+                "brokerFee": 20000,
+                "constructionYear": 2015,
+                "propertyState": "new",
+                "heating": true,
+                "qualityInterior": "Luxurious",
+                "energyCertificate": true,
+                "balcony": true,
+                "availability": true,
+                "availableDate": "2018-01-02T18:30:00Z",
+                "availableDuration": 10,
+                "rentalYield": 5,
+                "guaranteedRentalYield": true,
+                "zipCode": 2345,
+                "direction": "North",
+                "images": "<link>",
+                "latitude": 11.33,
+                "longitude": 13.22,
+                "address": "Sec 15 New York",
+                "distanceToCityCenter": "",
+                "furnished": true,
+                "storage": true,
+                "mapping": "iframe",
+                "studio": true,
+                "aboutProperty": "",
+                "propertyManagement": "",
+                "financing": true,
+                "welcomeNote": "",
+                "price": 100021
+            },
+            "type": "object",
+            "properties": {
+                "garden": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "_id": {
+                    "description": "",
+                    "example": "5b49ae4b20f8cd57d6a7da60",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "",
+                    "example": "Nice 200 sq meters house at Berlin downtown",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "",
+                    "example": "This is a luxurious house in Berlin with sea view.",
+                    "type": "string"
+                },
+                "typeOfDepartment": {
+                    "description": "",
+                    "example": "House",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "",
+                    "example": "berlin",
+                    "type": "string"
+                },
+                "numberOfFloors": {
+                    "description": "",
+                    "example": 3,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "livingSpace": {
+                    "description": "",
+                    "example": 200,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalAreas": {
+                    "description": "",
+                    "example": 400,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "usableArea": {
+                    "description": "",
+                    "example": 100,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rooms": {
+                    "description": "",
+                    "example": "4",
+                    "type": "string"
+                },
+                "bedrooms": {
+                    "description": "",
+                    "example": 4,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bathrooms": {
+                    "description": "",
+                    "example": 4,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "parkingSpace": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "purchasePrice": {
+                    "description": "",
+                    "example": 150000000,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "brokerFee": {
+                    "description": "",
+                    "example": 20000,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "constructionYear": {
+                    "description": "",
+                    "example": 2015,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "propertyState": {
+                    "description": "",
+                    "example": "new",
+                    "type": "string"
+                },
+                "heating": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "qualityInterior": {
+                    "description": "",
+                    "example": "Luxurious",
+                    "type": "string"
+                },
+                "energyCertificate": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "balcony": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "availability": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "availableDate": {
+                    "description": "",
+                    "example": "1/2/2018 6:30:00 PM",
+                    "type": "string"
+                },
+                "availableDuration": {
+                    "description": "",
+                    "example": 10,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rentalYield": {
+                    "description": "",
+                    "example": 5,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "guaranteedRentalYield": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "zipCode": {
+                    "description": "",
+                    "example": 2345,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "direction": {
+                    "description": "",
+                    "example": "North",
+                    "type": "string"
+                },
+                "images": {
+                    "description": "",
+                    "example": "<link>",
+                    "type": "string"
+                },
+                "latitude": {
+                    "description": "",
+                    "example": 11.33,
+                    "type": "number",
+                    "format": "double"
+                },
+                "longitude": {
+                    "description": "",
+                    "example": 13.22,
+                    "type": "number",
+                    "format": "double"
+                },
+                "address": {
+                    "description": "",
+                    "example": "Sec 15 New York",
+                    "type": "string"
+                },
+                "distanceToCityCenter": {
+                    "description": "",
+                    "type": "string"
+                },
+                "furnished": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "storage": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "mapping": {
+                    "description": "",
+                    "example": "iframe",
+                    "type": "string"
+                },
+                "studio": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "aboutProperty": {
+                    "description": "",
+                    "type": "string"
+                },
+                "propertyManagement": {
+                    "description": "",
+                    "type": "string"
+                },
+                "financing": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "welcomeNote": {
+                    "description": "",
+                    "type": "string"
+                },
+                "price": {
+                    "description": "",
+                    "example": 100021,
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "garden",
+                "_id",
+                "title",
+                "description",
+                "typeOfDepartment",
+                "city",
+                "numberOfFloors",
+                "livingSpace",
+                "totalAreas",
+                "usableArea",
+                "rooms",
+                "bedrooms",
+                "bathrooms",
+                "parkingSpace",
+                "purchasePrice",
+                "brokerFee",
+                "constructionYear",
+                "propertyState",
+                "heating",
+                "qualityInterior",
+                "energyCertificate",
+                "balcony",
+                "availability",
+                "availableDate",
+                "availableDuration",
+                "rentalYield",
+                "guaranteedRentalYield",
+                "zipCode",
+                "direction",
+                "images",
+                "latitude",
+                "longitude",
+                "address",
+                "distanceToCityCenter",
+                "furnished",
+                "storage",
+                "mapping",
+                "studio",
+                "aboutProperty",
+                "propertyManagement",
+                "financing",
+                "welcomeNote",
+                "price"
+            ]
+        },
+        "City  ny": {
+            "title": "City - NY",
+            "example": {
+                "garden": true,
+                "_id": "5b49e811fa9f6d0eade076fe",
+                "title": "Title 2",
+                "description": "Test description 2",
+                "typeOfDepartment": "apartment",
+                "city": "new york",
+                "numberOfFloors": 5,
+                "livingSpace": 200,
+                "totalAreas": 233,
+                "usableArea": 433,
+                "rooms": "5",
+                "bedrooms": 2,
+                "bathrooms": 4,
+                "parkingSpace": false,
+                "purchasePrice": 130000000,
+                "brokerFee": 20000,
+                "constructionYear": 2015,
+                "propertyState": "new",
+                "heating": true,
+                "qualityInterior": "Luxurious",
+                "energyCertificate": true,
+                "balcony": true,
+                "availability": true,
+                "availableDate": "2018-01-02T18:30:00Z",
+                "availableDuration": 10,
+                "rentalYield": 5,
+                "guaranteedRentalYield": true,
+                "zipCode": 2345,
+                "direction": "North",
+                "images": "<link>",
+                "latitude": 11.33,
+                "longitude": 13.22,
+                "address": "Sec 15 New York",
+                "distanceToCityCenter": "",
+                "furnished": true,
+                "storage": true,
+                "mapping": "iframe",
+                "studio": true,
+                "aboutProperty": "",
+                "propertyManagement": "",
+                "financing": true,
+                "welcomeNote": "",
+                "price": 100021
+            },
+            "type": "object",
+            "properties": {
+                "garden": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "_id": {
+                    "description": "",
+                    "example": "5b49e811fa9f6d0eade076fe",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "",
+                    "example": "Title 2",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "",
+                    "example": "Test description 2",
+                    "type": "string"
+                },
+                "typeOfDepartment": {
+                    "description": "",
+                    "example": "apartment",
+                    "type": "string"
+                },
+                "city": {
+                    "description": "",
+                    "example": "new york",
+                    "type": "string"
+                },
+                "numberOfFloors": {
+                    "description": "",
+                    "example": 5,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "livingSpace": {
+                    "description": "",
+                    "example": 200,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalAreas": {
+                    "description": "",
+                    "example": 233,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "usableArea": {
+                    "description": "",
+                    "example": 433,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rooms": {
+                    "description": "",
+                    "example": "5",
+                    "type": "string"
+                },
+                "bedrooms": {
+                    "description": "",
+                    "example": 2,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "bathrooms": {
+                    "description": "",
+                    "example": 4,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "parkingSpace": {
+                    "description": "",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "purchasePrice": {
+                    "description": "",
+                    "example": 130000000,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "brokerFee": {
+                    "description": "",
+                    "example": 20000,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "constructionYear": {
+                    "description": "",
+                    "example": 2015,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "propertyState": {
+                    "description": "",
+                    "example": "new",
+                    "type": "string"
+                },
+                "heating": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "qualityInterior": {
+                    "description": "",
+                    "example": "Luxurious",
+                    "type": "string"
+                },
+                "energyCertificate": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "balcony": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "availability": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "availableDate": {
+                    "description": "",
+                    "example": "1/2/2018 6:30:00 PM",
+                    "type": "string"
+                },
+                "availableDuration": {
+                    "description": "",
+                    "example": 10,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rentalYield": {
+                    "description": "",
+                    "example": 5,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "guaranteedRentalYield": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "zipCode": {
+                    "description": "",
+                    "example": 2345,
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "direction": {
+                    "description": "",
+                    "example": "North",
+                    "type": "string"
+                },
+                "images": {
+                    "description": "",
+                    "example": "<link>",
+                    "type": "string"
+                },
+                "latitude": {
+                    "description": "",
+                    "example": 11.33,
+                    "type": "number",
+                    "format": "double"
+                },
+                "longitude": {
+                    "description": "",
+                    "example": 13.22,
+                    "type": "number",
+                    "format": "double"
+                },
+                "address": {
+                    "description": "",
+                    "example": "Sec 15 New York",
+                    "type": "string"
+                },
+                "distanceToCityCenter": {
+                    "description": "",
+                    "type": "string"
+                },
+                "furnished": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "storage": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "mapping": {
+                    "description": "",
+                    "example": "iframe",
+                    "type": "string"
+                },
+                "studio": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "aboutProperty": {
+                    "description": "",
+                    "type": "string"
+                },
+                "propertyManagement": {
+                    "description": "",
+                    "type": "string"
+                },
+                "financing": {
+                    "description": "",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "welcomeNote": {
+                    "description": "",
+                    "type": "string"
+                },
+                "price": {
+                    "description": "",
+                    "example": 100021,
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "garden",
+                "_id",
+                "title",
+                "description",
+                "typeOfDepartment",
+                "city",
+                "numberOfFloors",
+                "livingSpace",
+                "totalAreas",
+                "usableArea",
+                "rooms",
+                "bedrooms",
+                "bathrooms",
+                "parkingSpace",
+                "purchasePrice",
+                "brokerFee",
+                "constructionYear",
+                "propertyState",
+                "heating",
+                "qualityInterior",
+                "energyCertificate",
+                "balcony",
+                "availability",
+                "availableDate",
+                "availableDuration",
+                "rentalYield",
+                "guaranteedRentalYield",
+                "zipCode",
+                "direction",
+                "images",
+                "latitude",
+                "longitude",
+                "address",
+                "distanceToCityCenter",
+                "furnished",
+                "storage",
+                "mapping",
+                "studio",
+                "aboutProperty",
+                "propertyManagement",
+                "financing",
+                "welcomeNote",
+                "price"
+            ]
+        }
+    }
+}
