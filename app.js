@@ -10,7 +10,6 @@ var app = express();
 
 // database connection
 let options = {
-    useMongoClient: true,
     server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
     replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
 };

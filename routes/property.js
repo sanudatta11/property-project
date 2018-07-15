@@ -9,67 +9,67 @@ let validator = require('validator');
 
 
 function allocator(req, property) {
-    if (!validator.isEmpty(req.body.description))
+    if ((typeof req.body.description !== 'undefined') && !validator.isEmpty(req.body.description))
         property.description = req.body.description;
-    if (!validator.isEmpty(req.body.typeOfDepartment))
+    if ((typeof req.body.typeOfDepartment !== 'undefined') && !validator.isEmpty(req.body.typeOfDepartment))
         property.typeOfDepartment = req.body.typeOfDepartment;
-    if (!validator.isEmpty(req.body.qualityInterior))
+    if ((typeof req.body.qualityInterior !== 'undefined') && !validator.isEmpty(req.body.qualityInterior))
         property.qualityInterior = req.body.qualityInterior;
-    if (!validator.isEmpty(req.body.direction))
+    if ((typeof req.body.direction !== 'undefined') && !validator.isEmpty(req.body.direction))
         property.direction = req.body.direction;
-    if (!validator.isEmpty(req.body.images) && validator.isURL(req.body.images))
+    if ((typeof req.body.images !== 'undefined') && !validator.isEmpty(req.body.images) && validator.isURL(req.body.images))
         property.images = req.body.images;
-    if (!validator.isEmpty(req.body.address))
+    if ((typeof req.body.address !== 'undefined') && !validator.isEmpty(req.body.address))
         property.address = req.body.address;
-    if (!validator.isEmpty(req.body.distanceToCityCenter))
+    if ((typeof req.body.distanceToCityCenter !== 'undefined') && !validator.isEmpty(req.body.distanceToCityCenter))
         property.distanceToCityCenter = req.body.distanceToCityCenter;
-    if (!validator.isEmpty(req.body.mapping))
+    if ((typeof req.body.mapping !== 'undefined') && !validator.isEmpty(req.body.mapping))
         property.mapping = req.body.mapping;
-    if (!validator.isEmpty(req.body.aboutProperty))
+    if ((typeof req.body.aboutProperty !== 'undefined') && !validator.isEmpty(req.body.aboutProperty))
         property.aboutProperty = req.body.aboutProperty;
-    if (!validator.isEmpty(req.body.propertyManagement))
+    if ((typeof req.body.propertyManagement !== 'undefined') && !validator.isEmpty(req.body.propertyManagement))
         property.propertyManagement = req.body.propertyManagement;
-    if (!validator.isEmpty(req.body.welcomeNote))
+    if ((typeof req.body.welcomeNote !== 'undefined') && !validator.isEmpty(req.body.welcomeNote))
         property.welcomeNote = req.body.welcomeNote;
-    if (!validator.isEmpty(req.body.companyLogo))
+    if ((typeof req.body.companyLogo !== 'undefined') && !validator.isEmpty(req.body.companyLogo))
         property.companyLogo = req.body.companyLogo;
 
-    if (!validator.isInt(req.body.numberOfFloors))
+    if ((typeof req.body.numberOfFloors !== 'undefined') && !validator.isInt(req.body.numberOfFloors))
         property.numberOfFloors = req.body.numberOfFloors;
-    if (!validator.isInt(req.body.usableArea))
+    if ((typeof req.body.usableArea !== 'undefined') && !validator.isInt(req.body.usableArea))
         property.usableArea = req.body.usableArea;
-    if (!validator.isInt(req.body.brokerFee))
+    if ((typeof req.body.brokerFee !== 'undefined') && !validator.isInt(req.body.brokerFee))
         property.brokerFee = req.body.brokerFee;
-    if (!validator.isInt(req.body.constructionYear))
+    if ((typeof req.body.constructionYear !== 'undefined') && !validator.isInt(req.body.constructionYear))
         property.constructionYear = req.body.constructionYear;
-    if (!validator.isInt(req.body.rentalYield))
+    if ((typeof req.body.rentalYield !== 'undefined') && !validator.isInt(req.body.rentalYield))
         property.rentalYield = req.body.rentalYield;
-    if (!validator.isInt(req.body.zipCode) && validator.isPostalCode(req.body.zipCode))
+    if ((typeof req.body.zipCode !== 'undefined') && !validator.isInt(req.body.zipCode) && validator.isPostalCode(req.body.zipCode))
         property.zipCode = req.body.zipCode;
-    if (!validator.isInt(req.body.latitude))
+    if ((typeof req.body.latitude !== 'undefined') && !validator.isInt(req.body.latitude))
         property.latitude = req.body.latitude;
-    if (!validator.isInt(req.body.longitude))
+    if ((typeof req.body.longitude !== 'undefined') && !validator.isInt(req.body.longitude))
         property.longitude = req.body.longitude;
 
-    if (!validator.isBoolean(req.body.parkingSpace))
+    if ((typeof req.body.parkingSpace !== 'undefined') && !validator.isBoolean(req.body.parkingSpace))
         property.parkingSpace = req.body.parkingSpace;
-    if (!validator.isBoolean(req.body.garden))
+    if ((typeof req.body.garden !== 'undefined') && !validator.isBoolean(req.body.garden))
         property.garden = req.body.garden;
-    if (!validator.isBoolean(req.body.heating))
+    if ((typeof req.body.heating !== 'undefined') && !validator.isBoolean(req.body.heating))
         property.heating = req.body.heating;
-    if (!validator.isBoolean(req.body.balcony))
+    if ((typeof req.body.balcony !== 'undefined') && !validator.isBoolean(req.body.balcony))
         property.balcony = req.body.balcony;
-    if (!validator.isBoolean(req.body.availability))
+    if ((typeof req.body.availability !== 'undefined') && !validator.isBoolean(req.body.availability))
         property.availability = req.body.availability;
-    if (!validator.isBoolean(req.body.guaranteedRentalYield))
+    if ((typeof req.body.guaranteedRentalYield !== 'undefined') && !validator.isBoolean(req.body.guaranteedRentalYield))
         property.guaranteedRentalYield = req.body.guaranteedRentalYield;
-    if (!validator.isBoolean(req.body.furnished))
+    if ((typeof req.body.furnished !== 'undefined') && !validator.isBoolean(req.body.furnished))
         property.furnished = req.body.furnished;
-    if (!validator.isBoolean(req.body.storage))
+    if ((typeof req.body.storage !== 'undefined') && !validator.isBoolean(req.body.storage))
         property.storage = req.body.storage;
-    if (!validator.isBoolean(req.body.studio))
+    if ((typeof req.body.studio !== 'undefined') && !validator.isBoolean(req.body.studio))
         property.studio = req.body.studio;
-    if (!validator.isBoolean(req.body.financing))
+    if ((typeof req.body.financing !== 'undefined') && !validator.isBoolean(req.body.financing))
         property.financing = req.body.financing;
 };
 
@@ -254,7 +254,7 @@ router.get('/city/:cityName', function (req, res, next) {
 
 router.post('/createProperty', function (req, res, next) {
     validationJS.validCompany(req, function (err) {
-        if (err === null) {
+        if (!err) {
             let property = new Property({
                 title: req.body.title,
                 city: req.body.city,
@@ -262,17 +262,17 @@ router.post('/createProperty', function (req, res, next) {
                 totalAreas: req.body.totalAreas,
                 rooms: req.body.rooms,
                 bedrooms: req.body.bedrooms,
-                purchasePrice: req.body.purchasePrice,
+                bathrooms: req.body.bathrooms,
                 propertyState: req.body.propertyState,
                 energyCertificate: req.body.energyCertificate,
                 availableDate: req.body.availableDate,
                 price: req.body.price
             });
-
+            console.log("Done");
             allocator(req,property);    //Helper Function
 
             property.save(function (savePropertyError, savedProperty) {
-                if (saveCompanyError) {
+                if (savePropertyError) {
                     console.log(savePropertyError);
                     res.status(500).json({
                         info: "Property Save Error",
@@ -296,44 +296,44 @@ router.post('/createProperty', function (req, res, next) {
 });
 
 
-router.post('/updateProperty/:pid', function () {
+router.post('/updateProperty/:pid', function (req,res,next) {
     let pid = req.params.pid;
-    Property.findById(pid, function (err, data) {
+    Property.findById(pid, function (err, property) {
         if (err) {
             res.status(500).json(err);
-        } else if (!data.length) {
+        } else if (!property) {
             res.status(404).json({
                 'info': 'No properties found on specific Id'
             });
         } else {
-            if(!validator.isEmpty(req.body.title))
+            if ((typeof req.body.title !== 'undefined') && !validator.isEmpty(req.body.title))
                 property.title = req.body.title;
-            if(!validator.isEmpty(req.body.city))
+            if ((typeof req.body.city !== 'undefined') && !validator.isEmpty(req.body.city))
                 property.city = req.body.city;
-            if(!validator.isInt(req.body.bedrooms,{$gte:1}))
+            if ((typeof req.body.bedrooms !== 'undefined') && !validator.isInt(req.body.bedrooms,{$gte:1}))
                 property.bedrooms = req.body.bedrooms;
-            if(!validator.isEmpty(req.body.availableDate) && validator.isAfter(req.body.availableDate))
+            if ((typeof req.body.availableDate !== 'undefined') && validator.isAfter(req.body.availableDate))
                 property.availableDate = req.body.availableDate;
-            if(!validator.isEmpty(req.body.propertyState))
+            if ((typeof req.body.propertyState !== 'undefined') && !validator.isEmpty(req.body.propertyState))
                 property.propertyState = req.body.propertyState;
-            if(!validator.isInt(req.body.rooms,{$gte:1}))
+            if ((typeof req.body.rooms !== 'undefined') && !validator.isInt(req.body.rooms,{$gte:1}))
                 property.rooms = req.body.rooms;
-            if(!validator.isInt(req.body.price,{$gte:1}))
+            if ((typeof req.body.price !== 'undefined') && !validator.isInt(req.body.price,{$gte:1}))
                 property.price = req.body.price;
-            if(!validator.isInt(req.body.bathrooms,{$gte:1}))
+            if ((typeof req.body.bathrooms !== 'undefined') && !validator.isInt(req.body.bathrooms,{$gte:1}))
                 property.bathrooms = req.body.bathrooms;
-            if(!validator.isInt(req.body.totalAreas,{$gte:1}))    //Add ur specified minimum and max are
+            if ((typeof req.body.totalAreas !== 'undefined') && !validator.isInt(req.body.totalAreas,{$gte:1}))    //Add ur specified minimum and max are
                 property.totalAreas = req.body.totalAreas;
-            if(!validator.isInt(req.body.livingSpace,{$gte:1}))
+            if ((typeof req.body.livingSpace !== 'undefined') && !validator.isInt(req.body.livingSpace,{$gte:1}))
                 property.livingSpace = req.body.livingSpace;
-            if(!validator.isBoolean(req.body.energyCertificate))
+            if ((typeof req.body.energyCertificate !== 'undefined') && !validator.isBoolean(req.body.energyCertificate))
                 property.energyCertificate = req.body.energyCertificate;
 
             //Non Required alloction
             allocator(req,property);
 
             property.save(function (savePropertyError, savedProperty) {
-                if (saveCompanyError) {
+                if (savePropertyError) {
                     console.log(savePropertyError);
                     res.status(500).json({
                         info: "Property Save Error",
@@ -365,5 +365,6 @@ router.get('/delteProperty/:pid', function (req, res, next) {
         }
     });
 });
+
 
 module.exports = router;

@@ -52,8 +52,7 @@ var propertySchema = new Schema({
             type: Boolean
         },
         "purchasePrice":{
-            type: Number,
-            required: true
+            type: Number
         },
         "brokerFee":{
             type: Number
