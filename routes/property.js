@@ -252,7 +252,7 @@ router.get('/city/:cityName', function (req, res, next) {
     })
 });
 
-router.post('/createCompany', function (req, res, next) {
+router.post('/createProperty', function (req, res, next) {
     validationJS.validCompany(req, function (err) {
         if (err === null) {
             let property = new Property({
