@@ -47,9 +47,9 @@ function allocator(req, property) {
         property.rentalYield = parseInt(req.body.rentalYield);
     if ((typeof req.body.zipCode !== 'undefined') && validator.isInt(req.body.zipCode) && validator.isPostalCode(req.body.zipCode))
         property.zipCode = parseInt(req.body.zipCode);
-    if ((typeof req.body.latitude !== 'undefined') && validator.isInt(req.body.latitude))
+    if ((typeof req.body.latitude !== 'undefined') && validator.isInt(req.body.latitude) && validator.isLatLong(req.body.latitude))
         property.latitude = parseInt(req.body.latitude);
-    if ((typeof req.body.longitude !== 'undefined') && validator.isInt(req.body.longitude))
+    if ((typeof req.body.longitude !== 'undefined') && validator.isInt(req.body.longitude) && validator.isLatLong(req.body.longitude))
         property.longitude = parseInt(req.body.longitude);
 
     if ((typeof req.body.parkingSpace !== 'undefined') && validator.isBoolean(req.body.parkingSpace))
@@ -174,6 +174,7 @@ router.get('/properties', function (req, res, next) {
                     take = take && ((typeof req.query.budgetHigh === 'undefined') || (data[i].price <= parseInt(budgetRange.high)));
                     take = take && ((typeof data[i].distanceToCityCenter === 'undefined') || (typeof req.query.distanceLow === 'undefined') || data[i].distanceToCityCenter >= parseInt(distanceRange.low));
                     take = take && ((typeof data[i].distanceToCityCenter === 'undefined') || (typeof req.query.distanceHigh === 'undefined') || data[i].distanceToCityCenter <= parseInt(distanceRange.high));
+                    console.log(data[i].distanceToCityCenter <= parseInt(distanceRange.high));
 
                     if (take)
                         resultArray.push(data[i]);
@@ -300,46 +301,75 @@ router.post('/updateProperty/:pid', function (req,res,next) {
                 'info': 'No properties found on specific Id'
             });
         } else {
+            var errors = [];
             if ((typeof req.body.title !== 'undefined') && !validator.isEmpty(req.body.title))
                 property.title = req.body.title;
             if ((typeof req.body.city !== 'undefined') && !validator.isEmpty(req.body.city))
                 property.city = req.body.city;
-            if ((typeof req.body.bedrooms !== 'undefined') && validator.isInt(req.body.bedrooms,{min:config.variables.bedroomsMin}))
-                property.bedrooms = parseInt(req.body.bedrooms);
+            if ((typeof req.body.bedrooms !== 'undefined') && validator.isInt(req.body.bedrooms))
+                {
+                    if(!(parseInt(req.body.bedrooms)))
+                        errors.push("Bedrooms cannot be zero!");
+                    property.bedrooms = parseInt(req.body.bedrooms);
+                }
             if ((typeof req.body.availableDate !== 'undefined') && validator.isAfter(req.body.availableDate))
                 property.availableDate = req.body.availableDate;
             if ((typeof req.body.propertyState !== 'undefined') && !validator.isEmpty(req.body.propertyState))
                 property.propertyState = req.body.propertyState;
-            if ((typeof req.body.rooms !== 'undefined') && validator.isInt(req.body.rooms,{min:config.variables.roomsMin}))
+            if ((typeof req.body.rooms !== 'undefined') && validator.isInt(req.body.rooms)) {
+                if (!(parseInt(req.body.rooms)))
+                    errors.push("Rooms cannot be zero!");
                 property.rooms = parseInt(req.body.rooms);
-            if ((typeof req.body.price !== 'undefined') && validator.isInt(req.body.price,{min:config.variables.priceMin}))
+            }
+            if ((typeof req.body.price !== 'undefined') && validator.isInt(req.body.price)) {
+                if (!(parseInt(req.body.price)))
+                    errors.push("Price cannot be zero!");
                 property.price = parseInt(req.body.price);
-            if ((typeof req.body.bathrooms !== 'undefined') && validator.isInt(req.body.bathrooms,{min:config.variables.bathroomsMin}))
+            }
+            if ((typeof req.body.bathrooms !== 'undefined') && validator.isInt(req.body.bathrooms)) {
+                if (!(parseInt(req.body.bathrooms)))
+                    errors.push("Bathrooms cannot be zero!");
                 property.bathrooms = parseInt(req.body.bathrooms);
-            if ((typeof req.body.totalAreas !== 'undefined') && validator.isInt(req.body.totalAreas,{min:config.variables.totalAreasMin}))    //Add ur specified minimum and max are
+            }
+            if ((typeof req.body.totalAreas !== 'undefined') && validator.isInt(req.body.totalAreas)) {
+                if (!(parseInt(req.body.totalAreas)))
+                    errors.push("Total Areas cannot be zero!");
                 property.totalAreas = parseInt(req.body.totalAreas);
-            if ((typeof req.body.livingSpace !== 'undefined') && validator.isInt(req.body.livingSpace,{min:config.variables.livingSpaceMin}))
+            }
+            if ((typeof req.body.livingSpace !== 'undefined') && validator.isInt(req.body.livingSpace)) {
+                if (!(parseInt(req.body.livingSpace)))
+                    errors.push("Living Space cannot be zero!");
                 property.livingSpace = parseInt(req.body.livingSpace);
+            }
             if ((typeof req.body.energyCertificate !== 'undefined') && validator.isBoolean(req.body.energyCertificate))
                 property.energyCertificate = req.body.energyCertificate;
 
             //Non Required alloction
             allocator(req,property);
-
-            property.save(function (savePropertyError, savedProperty) {
-                if (savePropertyError) {
-                    console.log(savePropertyError);
-                    res.status(500).json({
-                        info: "Property Save Error",
-                        error: savePropertyError
-                    });
-                } else {
-                    res.status(200).json({
-                        info: "Property Saved",
-                        data: savedProperty
-                    })
-                }
-            });
+            if(errors.length)
+            {
+                res.status(400).json({
+                    info: "Required attributes bad update!",
+                    error: errors
+                })
+            }
+            else{
+                property.save(function (savePropertyError, savedProperty) {
+                    if (savePropertyError) {
+                        console.log(savePropertyError);
+                        res.status(500).json({
+                            info: "Property Save Error",
+                            error: savePropertyError
+                        });
+                    } else {
+                        res.status(200).json({
+                            info: "Property Saved",
+                            data: savedProperty
+                        })
+                    }
+                });
+            }
+            
         }
     });
 });
