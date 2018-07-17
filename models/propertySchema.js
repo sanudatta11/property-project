@@ -109,7 +109,7 @@ var propertySchema = new Schema({
             type: String
         },
         "distanceToCityCenter":{
-            type: String
+            type: Number
         },
         "furnished":{
             type: Boolean

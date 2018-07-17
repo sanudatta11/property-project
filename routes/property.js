@@ -21,7 +21,7 @@ function allocator(req, property) {
         property.images = req.body.images;
     if ((typeof req.body.address !== 'undefined') && !validator.isEmpty(req.body.address))
         property.address = req.body.address;
-    if ((typeof req.body.distanceToCityCenter !== 'undefined') && !validator.isEmpty(req.body.distanceToCityCenter))
+    if ((typeof req.body.distanceToCityCenter !== 'undefined') && !validator.isInt(req.body.distanceToCityCenter))
         property.distanceToCityCenter = req.body.distanceToCityCenter;
     if ((typeof req.body.mapping !== 'undefined') && !validator.isEmpty(req.body.mapping))
         property.mapping = req.body.mapping;
@@ -176,10 +176,10 @@ router.get('/properties', function (req, res, next) {
                 let resultArray = [];
                 for (let i = 0; i < data.length; ++i) {
                     let take = true;
-                    take = true && (typeof budgetRange.low == 'undefined' || data.budget >= budgetRange.low);
-                    take = true && (typeof budgetRange.high == 'undefined' || data.budget <= budgetRange.high);
-                    take = true && (typeof distanceRange.low == 'undefined' || data.budget >= distanceRange.low);
-                    take = true && (typeof distanceRange.high == 'undefined' || data.budget <= budgetRange.high);
+                    take = true && (typeof budgetRange.low == 'undefined' || data.price >= budgetRange.low);
+                    take = true && (typeof budgetRange.high == 'undefined' || data.price <= budgetRange.high);
+                    take = true && (typeof distanceRange.low == 'undefined' || data.distanceToCityCenter >= distanceRange.low);
+                    take = true && (typeof distanceRange.high == 'undefined' || data.distanceToCityCenter <= budgetRange.high);
 
                     if (take)
                         resultArray.push(data[i]);
@@ -253,8 +253,8 @@ router.get('/city/:cityName', function (req, res, next) {
 });
 
 router.post('/createProperty', function (req, res, next) {
-    validationJS.validCompany(req, function (err) {
-        if (!err) {
+    validationJS.validCompany(req, function (errors) {
+        if (errors === null) {
             let property = new Property({
                 title: req.body.title,
                 city: req.body.city,
@@ -268,7 +268,6 @@ router.post('/createProperty', function (req, res, next) {
                 availableDate: req.body.availableDate,
                 price: req.body.price
             });
-            console.log("Done");
             allocator(req,property);    //Helper Function
 
             property.save(function (savePropertyError, savedProperty) {
@@ -289,7 +288,8 @@ router.post('/createProperty', function (req, res, next) {
         } else {
             //Required Validation failed
             res.status(400).json({
-                info: "Bad Request! Validation failed on required attributes."
+                info: "Bad Request! Validation failed on required attributes.",
+                errors: errors
             });
         }
     });
