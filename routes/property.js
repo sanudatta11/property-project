@@ -18,8 +18,19 @@ function allocator(req, property) {
         property.qualityInterior = req.body.qualityInterior;
     if ((typeof req.body.direction !== 'undefined') && !validator.isEmpty(req.body.direction))
         property.direction = req.body.direction;
-    if ((typeof req.body.images !== 'undefined') && !validator.isEmpty(req.body.images) && validator.isURL(req.body.images))
-        property.images = req.body.images;
+    if ((typeof req.body.images !== 'undefined') && !Array.isArray(req.body.images) && !validator.isEmpty(req.body.images) && validator.isURL(req.body.images))
+        property.images.push(req.body.images);
+    console.log(Array.isArray(req.body.images));
+    console.log(req.body.images);
+    if ((typeof req.body.images !== 'undefined') && (Array.isArray(req.body.images)))
+        {
+            console.log("In");
+            for(var i =0 ;i<req.body.images.length ; ++i)
+                {
+                    if (validator.isURL(req.body.images[i]))
+                        property.images.push(req.body.images[i]);
+                }
+        }
     if ((typeof req.body.address !== 'undefined') && !validator.isEmpty(req.body.address))
         property.address = req.body.address;
     if ((typeof req.body.distanceToCityCenter !== 'undefined') && !validator.isInt(req.body.distanceToCityCenter))

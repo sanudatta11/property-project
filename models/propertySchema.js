@@ -96,9 +96,9 @@ var propertySchema = new Schema({
         "direction":{
             type: String
         },
-        "images":{
+        "images":[{
             type: String
-        },
+        }],
         "latitude":{
             type: Number
         },
