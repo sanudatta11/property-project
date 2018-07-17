@@ -174,7 +174,7 @@ router.get('/properties', function (req, res, next) {
                     take = take && ((typeof req.query.budgetHigh === 'undefined') || (data[i].price <= parseInt(budgetRange.high)));
                     take = take && ((typeof data[i].distanceToCityCenter === 'undefined') || (typeof req.query.distanceLow === 'undefined') || data[i].distanceToCityCenter >= parseInt(distanceRange.low));
                     take = take && ((typeof data[i].distanceToCityCenter === 'undefined') || (typeof req.query.distanceHigh === 'undefined') || data[i].distanceToCityCenter <= parseInt(distanceRange.high));
-                    console.log(data[i].distanceToCityCenter <= parseInt(distanceRange.high));
+                    // console.log(data[i].distanceToCityCenter <= parseInt(distanceRange.high));
 
                     if (take)
                         resultArray.push(data[i]);
@@ -306,39 +306,54 @@ router.post('/updateProperty/:pid', function (req,res,next) {
                 property.title = req.body.title;
             if ((typeof req.body.city !== 'undefined') && !validator.isEmpty(req.body.city))
                 property.city = req.body.city;
-            if ((typeof req.body.bedrooms !== 'undefined') && validator.isInt(req.body.bedrooms))
+            if ((typeof req.body.bedrooms !== 'undefined'))
                 {
                     if(!(parseInt(req.body.bedrooms)))
                         errors.push("Bedrooms cannot be zero!");
+                    if((req.body.bedrooms - Math.floor(req.body.bedrooms)) !== 0)
+                        errors.push("Bedrooms cannot be in decimal!");
                     property.bedrooms = parseInt(req.body.bedrooms);
+                    console.log(errors);
                 }
+
             if ((typeof req.body.availableDate !== 'undefined') && validator.isAfter(req.body.availableDate))
                 property.availableDate = req.body.availableDate;
             if ((typeof req.body.propertyState !== 'undefined') && !validator.isEmpty(req.body.propertyState))
                 property.propertyState = req.body.propertyState;
-            if ((typeof req.body.rooms !== 'undefined') && validator.isInt(req.body.rooms)) {
+            
+            if ((typeof req.body.rooms !== 'undefined')) {
                 if (!(parseInt(req.body.rooms)))
                     errors.push("Rooms cannot be zero!");
+                if ((req.body.rooms - Math.floor(req.body.rooms)) !== 0)
+                    errors.push("Rooms cannot be in decimal!");
                 property.rooms = parseInt(req.body.rooms);
             }
-            if ((typeof req.body.price !== 'undefined') && validator.isInt(req.body.price)) {
+            if ((typeof req.body.price !== 'undefined')) {
                 if (!(parseInt(req.body.price)))
                     errors.push("Price cannot be zero!");
+                if ((req.body.price - Math.floor(req.body.price)) !== 0)
+                    errors.push("Price cannot be in decimal!");
                 property.price = parseInt(req.body.price);
             }
-            if ((typeof req.body.bathrooms !== 'undefined') && validator.isInt(req.body.bathrooms)) {
+            if ((typeof req.body.bathrooms !== 'undefined')) {
                 if (!(parseInt(req.body.bathrooms)))
                     errors.push("Bathrooms cannot be zero!");
+                if ((req.body.bathrooms - Math.floor(req.body.bathrooms)) !== 0)
+                    errors.push("Bathrooms cannot be in decimal!");
                 property.bathrooms = parseInt(req.body.bathrooms);
             }
-            if ((typeof req.body.totalAreas !== 'undefined') && validator.isInt(req.body.totalAreas)) {
+            if ((typeof req.body.totalAreas !== 'undefined')) {
                 if (!(parseInt(req.body.totalAreas)))
                     errors.push("Total Areas cannot be zero!");
+                if ((req.body.totalAreas - Math.floor(req.body.totalAreas)) !== 0)
+                    errors.push("totalAreas cannot be in decimal!");
                 property.totalAreas = parseInt(req.body.totalAreas);
             }
-            if ((typeof req.body.livingSpace !== 'undefined') && validator.isInt(req.body.livingSpace)) {
+            if ((typeof req.body.livingSpace !== 'undefined')) {
                 if (!(parseInt(req.body.livingSpace)))
                     errors.push("Living Space cannot be zero!");
+                if ((req.body.livingSpace - Math.floor(req.body.livingSpace)) !== 0)
+                    errors.push("livingSpace cannot be in decimal!");
                 property.livingSpace = parseInt(req.body.livingSpace);
             }
             if ((typeof req.body.energyCertificate !== 'undefined') && validator.isBoolean(req.body.energyCertificate))
