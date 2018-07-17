@@ -34,7 +34,7 @@ var propertySchema = new Schema({
             type: Number
         },
         "rooms":{
-            type: String,
+            type: Number,
             required: true
         },
         "bedrooms":{

@@ -4,6 +4,7 @@ let async = require('async');
 let Property = require('../models/propertySchema');
 let validationJS = require('../validators/validationJS');
 let validator = require('validator');
+let config = require('../configVariables');
 
 //Helper Functions
 
@@ -34,61 +35,53 @@ function allocator(req, property) {
     if ((typeof req.body.companyLogo !== 'undefined') && !validator.isEmpty(req.body.companyLogo))
         property.companyLogo = req.body.companyLogo;
 
-    if ((typeof req.body.numberOfFloors !== 'undefined') && !validator.isInt(req.body.numberOfFloors))
-        property.numberOfFloors = req.body.numberOfFloors;
-    if ((typeof req.body.usableArea !== 'undefined') && !validator.isInt(req.body.usableArea))
-        property.usableArea = req.body.usableArea;
-    if ((typeof req.body.brokerFee !== 'undefined') && !validator.isInt(req.body.brokerFee))
-        property.brokerFee = req.body.brokerFee;
-    if ((typeof req.body.constructionYear !== 'undefined') && !validator.isInt(req.body.constructionYear))
-        property.constructionYear = req.body.constructionYear;
-    if ((typeof req.body.rentalYield !== 'undefined') && !validator.isInt(req.body.rentalYield))
-        property.rentalYield = req.body.rentalYield;
-    if ((typeof req.body.zipCode !== 'undefined') && !validator.isInt(req.body.zipCode) && validator.isPostalCode(req.body.zipCode))
-        property.zipCode = req.body.zipCode;
-    if ((typeof req.body.latitude !== 'undefined') && !validator.isInt(req.body.latitude))
-        property.latitude = req.body.latitude;
-    if ((typeof req.body.longitude !== 'undefined') && !validator.isInt(req.body.longitude))
-        property.longitude = req.body.longitude;
+    if ((typeof req.body.numberOfFloors !== 'undefined') && validator.isInt(req.body.numberOfFloors))
+        property.numberOfFloors = parseInt(req.body.numberOfFloors);
+    if ((typeof req.body.usableArea !== 'undefined') && validator.isInt(req.body.usableArea))
+        property.usableArea = parseInt(req.body.usableArea);
+    if ((typeof req.body.brokerFee !== 'undefined') && validator.isInt(req.body.brokerFee))
+        property.brokerFee = parseInt(req.body.brokerFee);
+    if ((typeof req.body.constructionYear !== 'undefined') && validator.isInt(req.body.constructionYear))
+        property.constructionYear = parseInt(req.body.constructionYear);
+    if ((typeof req.body.rentalYield !== 'undefined') && validator.isInt(req.body.rentalYield))
+        property.rentalYield = parseInt(req.body.rentalYield);
+    if ((typeof req.body.zipCode !== 'undefined') && validator.isInt(req.body.zipCode) && validator.isPostalCode(req.body.zipCode))
+        property.zipCode = parseInt(req.body.zipCode);
+    if ((typeof req.body.latitude !== 'undefined') && validator.isInt(req.body.latitude))
+        property.latitude = parseInt(req.body.latitude);
+    if ((typeof req.body.longitude !== 'undefined') && validator.isInt(req.body.longitude))
+        property.longitude = parseInt(req.body.longitude);
 
-    if ((typeof req.body.parkingSpace !== 'undefined') && !validator.isBoolean(req.body.parkingSpace))
+    if ((typeof req.body.parkingSpace !== 'undefined') && validator.isBoolean(req.body.parkingSpace))
         property.parkingSpace = req.body.parkingSpace;
-    if ((typeof req.body.garden !== 'undefined') && !validator.isBoolean(req.body.garden))
+    if ((typeof req.body.garden !== 'undefined') && validator.isBoolean(req.body.garden))
         property.garden = req.body.garden;
-    if ((typeof req.body.heating !== 'undefined') && !validator.isBoolean(req.body.heating))
+    if ((typeof req.body.heating !== 'undefined') && validator.isBoolean(req.body.heating))
         property.heating = req.body.heating;
-    if ((typeof req.body.balcony !== 'undefined') && !validator.isBoolean(req.body.balcony))
+    if ((typeof req.body.balcony !== 'undefined') && validator.isBoolean(req.body.balcony))
         property.balcony = req.body.balcony;
-    if ((typeof req.body.availability !== 'undefined') && !validator.isBoolean(req.body.availability))
+    if ((typeof req.body.availability !== 'undefined') && validator.isBoolean(req.body.availability))
         property.availability = req.body.availability;
-    if ((typeof req.body.guaranteedRentalYield !== 'undefined') && !validator.isBoolean(req.body.guaranteedRentalYield))
+    if ((typeof req.body.guaranteedRentalYield !== 'undefined') && validator.isBoolean(req.body.guaranteedRentalYield))
         property.guaranteedRentalYield = req.body.guaranteedRentalYield;
-    if ((typeof req.body.furnished !== 'undefined') && !validator.isBoolean(req.body.furnished))
+    if ((typeof req.body.furnished !== 'undefined') && validator.isBoolean(req.body.furnished))
         property.furnished = req.body.furnished;
-    if ((typeof req.body.storage !== 'undefined') && !validator.isBoolean(req.body.storage))
+    if ((typeof req.body.storage !== 'undefined') && validator.isBoolean(req.body.storage))
         property.storage = req.body.storage;
-    if ((typeof req.body.studio !== 'undefined') && !validator.isBoolean(req.body.studio))
+    if ((typeof req.body.studio !== 'undefined') && validator.isBoolean(req.body.studio))
         property.studio = req.body.studio;
-    if ((typeof req.body.financing !== 'undefined') && !validator.isBoolean(req.body.financing))
+    if ((typeof req.body.financing !== 'undefined') && validator.isBoolean(req.body.financing))
         property.financing = req.body.financing;
 };
 
 
 router.get('/properties', function (req, res, next) {
     if (typeof req.query.filter !== 'undefined') {
-        // let bugetRange = {
-        //     low: req.query.budgetLow,
-        //     high: req.query.budgetHigh,
-        // };
-        // let distanceRange = {
-        //
-        // };
+        
         let bedroomsSelector = (req.query.bedrooms) ? "$in" : "$nin";
         let bedrooms = (req.query.bedrooms) ? [parseInt(req.query.bedrooms)] : [];
         let purchasePriceSelector = (req.query.purchasePrice) ? "$in" : "$nin";
         let purchasePrice = (req.query.purchasePrice) ? [parseInt(req.query.purchasePrice)] : [];
-        console.log(bedrooms);
-        console.log(purchasePriceSelector);
         //For boolean types:
         let furnishedChoice = [];
         if (typeof req.query.furnished !== 'undefined') {
@@ -117,19 +110,19 @@ router.get('/properties', function (req, res, next) {
                 storageChoice = [true];
             }
         }
-        let carParkChoice = [];
-        if (typeof req.query.carPark !== 'undefined') {
-            if (req.query.carPark == "true" || req.query.carPark == true) {
-                carParkChoice = [false];
+        let parkingSpaceChoice = [];
+        if (typeof req.query.parkingSpace !== 'undefined') {
+            if (req.query.parkingSpace == "true" || req.query.parkingSpace == true) {
+                parkingSpaceChoice = [false];
             }
             else {
-                carParkChoice = [true];
+                parkingSpaceChoice = [true];
             }
         }
-        console.log(carParkChoice, storageChoice, gardenChoice);
+        console.log(parkingSpaceChoice, storageChoice, gardenChoice);
         async.waterfall([
             function (callback) {
-                console.log("enter into 1st");
+                // console.log("enter into 1st");
                 Property.find({
                     furnished: {
                         $nin: furnishedChoice
@@ -141,7 +134,7 @@ router.get('/properties', function (req, res, next) {
                         $nin: storageChoice
                     },
                     parkingSpace: {
-                        $nin: carParkChoice
+                        $nin: parkingSpaceChoice
                     },
                     bedrooms: {
                         [bedroomsSelector]: bedrooms
@@ -166,20 +159,21 @@ router.get('/properties', function (req, res, next) {
             },
             function (data, callback) {
                 let budgetRange = {
-                    low: req.query.budgetLow,
-                    high: req.query.budgetHigh,
+                    low: parseInt(req.query.budgetLow),
+                    high: parseInt(req.query.budgetHigh),
                 };
                 let distanceRange = {
-                    low: req.query.distanceLow,
-                    high: req.query.distanceHigh
+                    low: parseInt(req.query.distanceLow),
+                    high: parseInt(req.query.distanceHigh)
                 };
                 let resultArray = [];
                 for (let i = 0; i < data.length; ++i) {
                     let take = true;
-                    take = true && (typeof budgetRange.low == 'undefined' || data.price >= budgetRange.low);
-                    take = true && (typeof budgetRange.high == 'undefined' || data.price <= budgetRange.high);
-                    take = true && (typeof distanceRange.low == 'undefined' || data.distanceToCityCenter >= distanceRange.low);
-                    take = true && (typeof distanceRange.high == 'undefined' || data.distanceToCityCenter <= budgetRange.high);
+                    console.log(data[i].price <= parseInt(budgetRange.high));
+                    take = take && ((typeof req.query.budgetLow === 'undefined') || (data[i].price >= parseInt(budgetRange.low)));
+                    take = take && ((typeof req.query.budgetHigh === 'undefined') || (data[i].price <= parseInt(budgetRange.high)));
+                    take = take && ((typeof data[i].distanceToCityCenter === 'undefined') || (typeof req.query.distanceLow === 'undefined') || data[i].distanceToCityCenter >= parseInt(distanceRange.low));
+                    take = take && ((typeof data[i].distanceToCityCenter === 'undefined') || (typeof req.query.distanceHigh === 'undefined') || data[i].distanceToCityCenter <= parseInt(distanceRange.high));
 
                     if (take)
                         resultArray.push(data[i]);
@@ -192,11 +186,11 @@ router.get('/properties', function (req, res, next) {
             }
             else if (!resultArray.length) {
                 res.status(404).json({
-                    'info': 'No properties found'
+                    'info': 'No properties found  on specific filter'
                 });
             }
             else {
-                console.log('done');
+                // console.log('done');
                 res.status(200).json({
                     data: resultArray
                 });
@@ -258,15 +252,15 @@ router.post('/createProperty', function (req, res, next) {
             let property = new Property({
                 title: req.body.title,
                 city: req.body.city,
-                livingSpace: req.body.livingSpace,
-                totalAreas: req.body.totalAreas,
-                rooms: req.body.rooms,
-                bedrooms: req.body.bedrooms,
-                bathrooms: req.body.bathrooms,
+                livingSpace: parseInt(req.body.livingSpace),
+                totalAreas: parseInt(req.body.totalAreas),
+                rooms: parseInt(req.body.rooms),
+                bedrooms: parseInt(req.body.bedrooms),
+                bathrooms: parseInt(req.body.bathrooms),
                 propertyState: req.body.propertyState,
                 energyCertificate: req.body.energyCertificate,
                 availableDate: req.body.availableDate,
-                price: req.body.price
+                price: parseInt(req.body.price)
             });
             allocator(req,property);    //Helper Function
 
@@ -310,23 +304,23 @@ router.post('/updateProperty/:pid', function (req,res,next) {
                 property.title = req.body.title;
             if ((typeof req.body.city !== 'undefined') && !validator.isEmpty(req.body.city))
                 property.city = req.body.city;
-            if ((typeof req.body.bedrooms !== 'undefined') && !validator.isInt(req.body.bedrooms,{$gte:1}))
-                property.bedrooms = req.body.bedrooms;
+            if ((typeof req.body.bedrooms !== 'undefined') && validator.isInt(req.body.bedrooms,{min:config.variables.bedroomsMin}))
+                property.bedrooms = parseInt(req.body.bedrooms);
             if ((typeof req.body.availableDate !== 'undefined') && validator.isAfter(req.body.availableDate))
                 property.availableDate = req.body.availableDate;
             if ((typeof req.body.propertyState !== 'undefined') && !validator.isEmpty(req.body.propertyState))
                 property.propertyState = req.body.propertyState;
-            if ((typeof req.body.rooms !== 'undefined') && !validator.isInt(req.body.rooms,{$gte:1}))
-                property.rooms = req.body.rooms;
-            if ((typeof req.body.price !== 'undefined') && !validator.isInt(req.body.price,{$gte:1}))
-                property.price = req.body.price;
-            if ((typeof req.body.bathrooms !== 'undefined') && !validator.isInt(req.body.bathrooms,{$gte:1}))
-                property.bathrooms = req.body.bathrooms;
-            if ((typeof req.body.totalAreas !== 'undefined') && !validator.isInt(req.body.totalAreas,{$gte:1}))    //Add ur specified minimum and max are
-                property.totalAreas = req.body.totalAreas;
-            if ((typeof req.body.livingSpace !== 'undefined') && !validator.isInt(req.body.livingSpace,{$gte:1}))
-                property.livingSpace = req.body.livingSpace;
-            if ((typeof req.body.energyCertificate !== 'undefined') && !validator.isBoolean(req.body.energyCertificate))
+            if ((typeof req.body.rooms !== 'undefined') && validator.isInt(req.body.rooms,{min:config.variables.roomsMin}))
+                property.rooms = parseInt(req.body.rooms);
+            if ((typeof req.body.price !== 'undefined') && validator.isInt(req.body.price,{min:config.variables.priceMin}))
+                property.price = parseInt(req.body.price);
+            if ((typeof req.body.bathrooms !== 'undefined') && validator.isInt(req.body.bathrooms,{min:config.variables.bathroomsMin}))
+                property.bathrooms = parseInt(req.body.bathrooms);
+            if ((typeof req.body.totalAreas !== 'undefined') && validator.isInt(req.body.totalAreas,{min:config.variables.totalAreasMin}))    //Add ur specified minimum and max are
+                property.totalAreas = parseInt(req.body.totalAreas);
+            if ((typeof req.body.livingSpace !== 'undefined') && validator.isInt(req.body.livingSpace,{min:config.variables.livingSpaceMin}))
+                property.livingSpace = parseInt(req.body.livingSpace);
+            if ((typeof req.body.energyCertificate !== 'undefined') && validator.isBoolean(req.body.energyCertificate))
                 property.energyCertificate = req.body.energyCertificate;
 
             //Non Required alloction
@@ -351,18 +345,40 @@ router.post('/updateProperty/:pid', function (req,res,next) {
 });
 
 router.get('/delteProperty/:pid', function (req, res, next) {
-    Property.findByIdAndRemove(req.params.pid, function (err) {
-        if (err) {
-            console.log(err);
+    async.waterfall([
+        function (callback) {
+            Property.findById(req.params.pid,function(err,data){
+                    if (err) {
+                        console.log(err);
+                        res.status(500).json(err);
+                    } else if (!data) {
+                        res.status(404).json({
+                            "info": "Can't retrieve data on specific Id"
+                        });
+                    } else {
+                        callback(null);
+                    }
+            });
+        },
+        function (callback) {
+            Property.findByIdAndRemove(req.params.pid, function (err) {
+                if (err) 
+                    callback(err);
+                else 
+                    callback(null);
+                
+            });
+        }
+    ], function (err) {
+        if(err)
             res.status(500).json({
                 info: "Property Delete Error",
                 error: err
-            });
-        } else {
+            })
+        else
             res.status(200).json({
                 info: "Property Deleted"
-            })
-        }
+            });
     });
 });
 
